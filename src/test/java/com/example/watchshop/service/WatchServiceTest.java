@@ -37,4 +37,28 @@ public class WatchServiceTest {
         watches.add(new Watch(2, "appleWatch", 40, "6 for 200"));
         assertEquals(300, watchService.getTotalPrice(watches));
     }
+
+    @Test
+    public void testGettingWatchById() throws Exception {
+        ArrayList<String> watchIds = new ArrayList<>();
+        watchIds.add("1");
+        ArrayList<Watch> watches = watchService.creatWatchListFromIds(watchIds);
+        assertEquals("Rolex", watches.get(0).getWatchName());
+        assertEquals(1, watches.get(0).getWatchId());
+    }
+
+    @Test(expected = Exception.class)
+    public void testUsingUnusedWatchId() throws Exception {
+        ArrayList<String> watchIds = new ArrayList<>();
+        watchIds.add("1");
+        watchIds.add("6");
+        watchService.creatWatchListFromIds(watchIds);
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void testUsingIncorrectString() throws Exception {
+        ArrayList<String> watchIds = new ArrayList<>();
+        watchIds.add("1,1,1,1,1");
+        watchService.creatWatchListFromIds(watchIds);
+    }
 }

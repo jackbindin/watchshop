@@ -6,4 +6,6 @@ import com.example.watchshop.model.Watch;
 
 public interface WatchService {
     double getTotalPrice(ArrayList<Watch> watches) throws Exception;
+
+    ArrayList<Watch> creatWatchListFromIds(ArrayList<String> watchIdStrings) throws Exception;
 }
